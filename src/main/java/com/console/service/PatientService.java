@@ -1,6 +1,5 @@
 package com.console.service;
 
-import com.console.doctor.Doctor;
 import com.console.patient.IPatientService;
 import com.console.patient.Patient;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -10,7 +9,7 @@ import java.util.Random;
 
 public class PatientService implements IPatientService {
     Patient[] emptyPatientList = new Patient[]{};
-    private static final String filepath = "D:/Projects/Spring Work/console/files/patient.txt";
+    private static final String filepath = "D:/Projects/console/patient.txt";
 
     @Override
     public void createPatients(int size) {
@@ -69,13 +68,14 @@ public class PatientService implements IPatientService {
         }
 
     }
+
     public void writePatientsToFile() throws IOException {
         try {
 
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(emptyPatientList);
-            System.out.println("The Objects  were succesfully written to a file");
+            System.out.println("The Objects  were successfully written to a file");
             objectOut.close();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -92,24 +92,23 @@ public class PatientService implements IPatientService {
                 if (pat == null) {
                     break;
                 } else {
-                    for (Patient mockPatient: pat) {
-                        System.out.println("Doctor: Last Name: " + mockPatient.getLastName() + " First Name: " + mockPatient.getFirstName() + " Age: " + mockPatient.getAge() + " Reason: " + mockPatient.getReason() );
+                    for (Patient mockPatient : pat) {
+                        System.out.println("Doctor: Last Name: " + mockPatient.getLastName() + " First Name: " + mockPatient.getFirstName() + " Age: " + mockPatient.getAge() + " Reason: " + mockPatient.getReason());
                     }
-
-
                 }
-
-
             }
             fileIn.close();
-        }catch (FileNotFoundException e) {
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    public Patient[] getPatients(){
+
+    public Patient[] getPatients() {
         return emptyPatientList;
     }
+
     public void returnRemainingPatients(Patient[] patients, int position) {
         int nrOfPatients = patients.length - position;
         System.out.println("Remaining patients untreated are: " + nrOfPatients);

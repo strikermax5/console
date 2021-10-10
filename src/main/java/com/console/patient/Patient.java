@@ -2,11 +2,9 @@ package com.console.patient;
 
 
 import com.console.person.Person;
-
-import lombok.Setter;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
 @Getter
@@ -17,12 +15,11 @@ public class Patient extends Person implements Comparable<Patient> {
 
     public int compareTo(Patient patient) {
         int compareAge = ((Patient) patient).getAge();
-
         //ascending order
         return getAge() - compareAge;
-
     }
-    public static Comparator<Patient> FruitNameComparator
+
+    public static Comparator<Patient> patientNameComparator
             = new Comparator<Patient>() {
 
         public int compare(Patient patient1, Patient patient2) {
@@ -32,11 +29,6 @@ public class Patient extends Person implements Comparable<Patient> {
 
             //ascending order
             return patient1.compareTo(patient2);
-
-            //descending order
-            //return fruitName2.compareTo(fruitName1);
         }
-
     };
-
 }

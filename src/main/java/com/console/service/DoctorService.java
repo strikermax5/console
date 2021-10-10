@@ -36,12 +36,12 @@ public class DoctorService implements IDoctorService {
     @Override
     public void displayDoctors() {
         for (Doctor doctor : emptyDoctorList) {
-            System.out.println("Doctor: Last Name: " + doctor.getLastName() + " First Name: " + doctor.getFirstName() + " Age: " + doctor.getAge()+" Identification Number: " + doctor.getIdentificationNumber());
+            System.out.println("Doctor: Last Name: " + doctor.getLastName() + " First Name: " + doctor.getFirstName() + " Age: " + doctor.getAge() + " Identification Number: " + doctor.getIdentificationNumber());
         }
     }
 
 
-    public void writeDoctorsToFile() throws IOException{
+    public void writeDoctorsToFile() throws IOException {
         try {
 
             FileOutputStream fileOut = new FileOutputStream(filepath);
@@ -64,20 +64,22 @@ public class DoctorService implements IDoctorService {
                 if (doc == null) {
                     break;
                 } else {
-                    for (Doctor mockDoctor: doc) {
-                        System.out.println("Doctor: Last Name: " + mockDoctor.getLastName() + " First Name: " + mockDoctor.getFirstName() + " Age: " + mockDoctor.getAge() + " Identification Number: " + mockDoctor.getIdentificationNumber() );
+                    for (Doctor mockDoctor : doc) {
+                        System.out.println("Doctor: Last Name: " + mockDoctor.getLastName() + " First Name: " + mockDoctor.getFirstName() + " Age: " + mockDoctor.getAge() + " Identification Number: " + mockDoctor.getIdentificationNumber());
                     }
                 }
 
 
             }
             fileIn.close();
-        }catch (FileNotFoundException e) {
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    public Doctor[] getDoctors(){
+
+    public Doctor[] getDoctors() {
         return emptyDoctorList;
     }
 }

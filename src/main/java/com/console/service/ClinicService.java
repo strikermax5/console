@@ -22,10 +22,10 @@ public class ClinicService implements IClinicService {
         Arrays.sort(patients);
         //patientService.displayPatients();
 
-        for (Doctor doc: doctors) {
-            doctorHasWorked.put(doc.getIdentificationNumber(),false);
+        for (Doctor doc : doctors) {
+            doctorHasWorked.put(doc.getIdentificationNumber(), false);
         }
-        for (Doctor doc: doctors) {
+        for (Doctor doc : doctors) {
             shift(doc, patients);
         }
 
@@ -39,31 +39,8 @@ public class ClinicService implements IClinicService {
         int startHour = 0;
         long price = 0;
         int count = 0;
-            if(position > 0){
-                for (int i = position ; i < patients.length; i++) {
-                    if (startHour > shift) {
-                        break;
-                    } else {
-                        if (patients[i].getReason() == "PRESCRIPTION") {
-                            price = price + 20;
-                            startHour = startHour + 20;
-                            position = position + 1;
-                            count = count + 1;
-                        } else if (patients[i].getReason() == "CONSULTATION") {
-                            price = price + 50;
-                            startHour = startHour + 30;
-                            position = position + 1;
-                            count = count + 1;
-                        } else if (patients[i].getReason() == "TREATMENT") {
-                            price = price + 35;
-                            startHour = startHour + 40;
-                            position = position + 1;
-                            count = count + 1;
-                        }
-                    }
-                }
-            }else{
-            for (int i = 0 ; i < patients.length; i++) {
+        if (position > 0) {
+            for (int i = position; i < patients.length; i++) {
                 if (startHour > shift) {
                     break;
                 } else {
@@ -85,10 +62,33 @@ public class ClinicService implements IClinicService {
                     }
                 }
             }
+        } else {
+            for (int i = 0; i < patients.length; i++) {
+                if (startHour > shift) {
+                    break;
+                } else {
+                    if (patients[i].getReason() == "PRESCRIPTION") {
+                        price = price + 20;
+                        startHour = startHour + 20;
+                        position = position + 1;
+                        count = count + 1;
+                    } else if (patients[i].getReason() == "CONSULTATION") {
+                        price = price + 50;
+                        startHour = startHour + 30;
+                        position = position + 1;
+                        count = count + 1;
+                    } else if (patients[i].getReason() == "TREATMENT") {
+                        price = price + 35;
+                        startHour = startHour + 40;
+                        position = position + 1;
+                        count = count + 1;
+                    }
+                }
             }
+        }
 
         doctorHasWorked.put(doctor.getIdentificationNumber(), true);
-        System.out.println("Doctor: First Name " + doctor.getFirstName() + " Last Name: " + doctor.getLastName() +" - "+ doctor.getIdentificationNumber() + ": Nr of patients: " + count + " Time on Shift: " + startHour + "; Cashed: "+ price);
+        System.out.println("Doctor: First Name " + doctor.getFirstName() + " Last Name: " + doctor.getLastName() + " - " + doctor.getIdentificationNumber() + ": Nr of patients: " + count + " Time on Shift: " + startHour + "; Cashed: " + price);
 
     }
 

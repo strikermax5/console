@@ -7,6 +7,7 @@ import com.console.service.PatientService;
 
 public interface IClinicService {
     void createClinic(DoctorService doctorService, PatientService patientService);
+
     void shift(Doctor doctor, Patient[] patients);
 }
 
