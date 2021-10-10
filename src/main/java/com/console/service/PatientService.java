@@ -4,10 +4,12 @@ import com.console.patient.IPatientService;
 import com.console.patient.Patient;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.*;
 import java.util.Random;
 
 public class PatientService implements IPatientService {
     Patient[] emptyPatientList = new Patient[]{};
+    private static final String filepath = "D:/Projects/console/patient.txt";
 
     @Override
     public void createPatients(int size) {
@@ -63,6 +65,58 @@ public class PatientService implements IPatientService {
         public static Reason getRandom() {
             Random random = new Random();
             return values()[random.nextInt(values().length)];
+        }
+
+    }
+
+    public void writePatientsToFile() throws IOException {
+        try {
+
+            FileOutputStream fileOut = new FileOutputStream(filepath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(emptyPatientList);
+            System.out.println("The Objects  were successfully written to a file");
+            objectOut.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void readPatinetsFromFile() throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(filepath);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        try {
+            while (true) {
+
+                Patient[] pat = (Patient[]) in.readObject();
+                if (pat == null) {
+                    break;
+                } else {
+                    for (Patient mockPatient : pat) {
+                        System.out.println("Doctor: Last Name: " + mockPatient.getLastName() + " First Name: " + mockPatient.getFirstName() + " Age: " + mockPatient.getAge() + " Reason: " + mockPatient.getReason());
+                    }
+                }
+            }
+            fileIn.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Patient[] getPatients() {
+        return emptyPatientList;
+    }
+
+    public void returnRemainingPatients(Patient[] patients, int position) {
+        int nrOfPatients = patients.length - position;
+        System.out.println("Remaining patients untreated are: " + nrOfPatients);
+        for (int i = position; i < patients.length; i++) {
+            System.out.println("Patient: Last Name: " + patients[i].getLastName()
+                    + " First Name: " + patients[i].getFirstName()
+                    + " Age: " + patients[i].getAge()
+                    + " Reason: " + patients[i].getReason());
         }
 
     }

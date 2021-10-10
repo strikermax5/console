@@ -8,6 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Doctor extends Person {
-
     private long identificationNumber;
 }
