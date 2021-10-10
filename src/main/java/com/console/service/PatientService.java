@@ -74,7 +74,6 @@ public class PatientService implements IPatientService {
 
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            displayPatients();
             objectOut.writeObject(emptyPatientList);
             System.out.println("The Objects  were succesfully written to a file");
             objectOut.close();
@@ -107,5 +106,19 @@ public class PatientService implements IPatientService {
 
         } catch (IOException e) {
         }
+    }
+    public Patient[] getPatients(){
+        return emptyPatientList;
+    }
+    public void returnRemainingPatients(Patient[] patients, int position) {
+        int nrOfPatients = patients.length - position;
+        System.out.println("Remaining patients untreated are: " + nrOfPatients);
+        for (int i = position; i < patients.length; i++) {
+            System.out.println("Patient: Last Name: " + patients[i].getLastName()
+                    + " First Name: " + patients[i].getFirstName()
+                    + " Age: " + patients[i].getAge()
+                    + " Reason: " + patients[i].getReason());
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.console.service;
 
 import com.console.doctor.Doctor;
 import com.console.doctor.IDoctorService;
+import com.console.patient.Patient;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,6 @@ public class DoctorService implements IDoctorService {
 
             FileOutputStream fileOut = new FileOutputStream(filepath);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            displayDoctors();
             objectOut.writeObject(emptyDoctorList);
             System.out.println("The Objects  were succesfully written to a file");
             objectOut.close();
@@ -60,12 +60,13 @@ public class DoctorService implements IDoctorService {
         try {
             while (true) {
 
-                Doctor doc = (Doctor) in.readObject();
+                Doctor[] doc = (Doctor[]) in.readObject();
                 if (doc == null) {
                     break;
                 } else {
-                        System.out.println("Doctor: Last Name: " + doc.getLastName() + " First Name: " + doc.getFirstName() + " Age: " + doc.getAge() + " Identification Number: " + doc.getIdentificationNumber());
-
+                    for (Doctor mockDoctor: doc) {
+                        System.out.println("Doctor: Last Name: " + mockDoctor.getLastName() + " First Name: " + mockDoctor.getFirstName() + " Age: " + mockDoctor.getAge() + " Identification Number: " + mockDoctor.getIdentificationNumber() );
+                    }
                 }
 
 
@@ -75,5 +76,8 @@ public class DoctorService implements IDoctorService {
 
         } catch (IOException e) {
         }
+    }
+    public Doctor[] getDoctors(){
+        return emptyDoctorList;
     }
 }

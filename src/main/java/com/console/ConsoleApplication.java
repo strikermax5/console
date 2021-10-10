@@ -1,5 +1,6 @@
 package com.console;
 
+import com.console.service.ClinicService;
 import com.console.service.DoctorService;
 import com.console.service.PatientService;
 import org.springframework.boot.SpringApplication;
@@ -16,19 +17,24 @@ public class ConsoleApplication {
 		DoctorService doctorService = new DoctorService();
 		PatientService patientService = new PatientService();
 		Scanner console = new Scanner(System.in);
+		ClinicService clinicService = new ClinicService();
 
 		System.out.println("Doctors are being initialized");
-		//doctorService.createDoctors(8);
+		doctorService.createDoctors(8);
 		System.out.println("List of doctors generated: ");
-		//doctorService.displayDoctors();
-		//System.out.println("Would you like to save the doctors in a file Y/N?");
-		//String ch = console.nextLine();
-		//doctorService.writeDoctorsToFile();
-		//doctorService.readDoctorsFromFile();
+		doctorService.displayDoctors();
+	//	System.out.println("Doctors are being written to a file");
+	//	doctorService.writeDoctorsToFile();
+	//	System.out.println("Read doctors from file");
+	//	doctorService.readDoctorsFromFile();
 		System.out.println("List of patients generated: ");
 		patientService.createPatients(100);
-		//patientService.displayPatients();
-		patientService.writePatientsToFile();
-		patientService.readPatinetsFromFile();
+	//	patientService.displayPatients();
+		//System.out.println("Patients are being written to a file");
+	//	patientService.writePatientsToFile();
+		//System.out.println("Read patients from file");
+	//	patientService.readPatinetsFromFile();
+		System.out.println("Test if clinic service works");
+		clinicService.createClinic(doctorService, patientService);
 	}
 }
