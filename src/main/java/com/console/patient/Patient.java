@@ -19,7 +19,7 @@ public class Patient extends Person implements Comparable<Patient> {
         return getAge() - compareAge;
     }
 
-    public static Comparator<Patient> patientNameComparator
+    public static Comparator<Patient> patientAgeComparator
             = new Comparator<Patient>() {
 
         public int compare(Patient patient1, Patient patient2) {
